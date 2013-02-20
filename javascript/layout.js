@@ -1,7 +1,29 @@
 $(document).ready(function() {
 	$(".mobileTab").click(function(){
 		changeMap($(this).index());
-	})
+	});
+	$(".sideToggle").click(function(){
+		if($(this).hasClass("activeToggle")){
+			$("#leftPane").hide();
+			$(".sideToggle").removeClass("activeToggle");
+		}
+		else{
+			$(".sideToggle").removeClass("activeToggle");
+			$(this).addClass("activeToggle");
+			if($(this).index() === 2){
+				dojo.style(dojo.byId("legendHeader"), "display", "none");
+				dojo.style(dojo.byId("legendPanel"), "display", "none");
+				dojo.style(dojo.byId("descriptionPanel"), "height", "100%");
+			}
+			else{
+				dojo.style(dojo.byId("descriptionPanel"), "display", "none");
+				dojo.style(dojo.byId("legendHeader"), "display", "none");
+				dojo.style(dojo.byId("legendPanel"), "height", "100%");	
+			}
+			$("#leftPane").show();
+		}
+		dijit.byId("mainWindow").layout();
+	});
 });
 
 function setupLayout(){
@@ -51,11 +73,17 @@ function resetLayout(){
 		$("#mobileTabs").show();
 		$(".mobileTab").css("width",$(document).width()/3);
 		$(".mobileTab").last().css("width",($(document).width()/3) + 10);
+		$(".sideToggle").show();
+		$(".sideToggle").eq(1).css("top",($(".sideToggle").eq(0).outerHeight() + 48));
 	}
 	else{
 		$("#banner").show();
+		dojo.style(dojo.byId("descriptionPanel"), "display", "block");
+		dojo.style(dojo.byId("legendHeader"), "display", "block");
+		dojo.style(dojo.byId("legendPanel"), "height", "45%");
 		$("#leftPane").show();
 		$("#mobileTabs").hide();
+		$(".sideToggle").hide();
 	}
 	dijit.byId("mainWindow").layout();
 }
