@@ -182,6 +182,7 @@ function createMap(){
 		var mapDeferred = esri.arcgis.utils.createMap(arg.id, "mapDiv"+i, {
 			mapOptions: {
 				slider: true,
+				sliderPosition: "top-right",
 				nav: false,
 				wrapAround180:true
 			},

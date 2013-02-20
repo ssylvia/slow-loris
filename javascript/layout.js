@@ -1,3 +1,9 @@
+$(document).ready(function() {
+	$(".mobileTab").click(function(){
+		changeMap($(this).index());
+	})
+});
+
 function setupLayout(){
 	if (configOptions.displayDescription == false && configOptions.displayLegend == false){
 		dojo.style(dojo.byId("leftPane"), "display", "none");	
@@ -39,6 +45,18 @@ function resetLayout(){
 		}
 		dojo.style(dojo.byId("legendPanel"),"height",legendHeight+"px");
 	}
+	if($(document).width() < 800){
+		$("#banner").hide();
+		$("#leftPane").hide();
+		$("#mobileTabs").show();
+		$(".mobileTab").css("width",$(document).width()/3);
+		$(".mobileTab").last().css("width",($(document).width()/3) + 10);
+	}
+	else{
+		$("#banner").show();
+		$("#leftPane").show();
+		$("#mobileTabs").hide();
+	}
 	dijit.byId("mainWindow").layout();
 }
 
@@ -54,6 +72,8 @@ function changeMap(index){
 		dojo.forEach(dojo.query(".tab"),function(node){
 			dojo.removeClass(node,"selected");
 		});
+		$(".mobileTab").removeClass("selectedTab");
+		$(".mobileTab").eq(cm).addClass("selectedTab");
 		dojo.addClass(dojo.byId("tab"+cm),"selected");
 		dojo.forEach(_maps,function(map,i){
 			if(cm != i){
