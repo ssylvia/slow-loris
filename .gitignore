@@ -215,6 +215,12 @@ pip-log.txt
 .mr.developer.cfg
 
 #############
+## Sublime Project
+#############
+*.sublime-project
+*.sublime-workspace
+
+#############
 ## FTP Settings
 #############
 
