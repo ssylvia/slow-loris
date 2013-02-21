@@ -14,11 +14,13 @@ $(document).ready(function() {
 				dojo.style(dojo.byId("legendHeader"), "display", "none");
 				dojo.style(dojo.byId("legendPanel"), "display", "none");
 				dojo.style(dojo.byId("descriptionPanel"), "height", "100%");
+				dojo.style(dojo.byId("descriptionPanel"), "display", "block");
 			}
 			else{
 				dojo.style(dojo.byId("descriptionPanel"), "display", "none");
 				dojo.style(dojo.byId("legendHeader"), "display", "none");
-				dojo.style(dojo.byId("legendPanel"), "height", "100%");	
+				dojo.style(dojo.byId("legendPanel"), "height", "100%");
+				dojo.style(dojo.byId("legendPanel"), "display", "block");	
 			}
 			$("#leftPane").show();
 		}
