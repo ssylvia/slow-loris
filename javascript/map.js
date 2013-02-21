@@ -189,7 +189,9 @@ function createMap(){
 				sliderPosition: "top-right",
 				nav: false,
 				wrapAround180:true,
-				infoWindow: popup
+				infoWindow: popup,
+				maxZoom:6,
+            	minZoom:2
 			},
 			ignorePopups:false,
 			bingMapsKey: configOptions.bingmapskey
@@ -205,6 +207,15 @@ function createMap(){
 			dojo.connect(map,"onUpdateEnd",function(){
 				mapLoaded();
 				playAnimation();
+			});
+
+			dojo.forEach(getLayerByName(map,"csv"),function(lyr){
+				dojo.connect(lyr,"onMouseOver",function(){
+					map.setCursor("pointer");
+				});
+				dojo.connect(lyr,"onMouseOut",function(){
+					map.setCursor("default");
+				});
 			});
 
 			if (i == 0){
@@ -266,6 +277,47 @@ function createMap(){
 
 	setupLayout();
 }
+
+var getLayerByName = function(mapVariable,layerName,searchMainLayers,searchGraphicsLayers){
+  var layers = [];
+
+  if($.isArray(layerName)){
+    dojo.forEach(layerName,function(lyrName){
+      if(searchMainLayers !== false){
+        dojo.forEach(mapVariable.layerIds,function(lyr){
+          if(lyr.toLowerCase().search(lyrName.toLowerCase()) !== -1){
+            layers.push(mapVariable.getLayer(lyr));
+          }
+        });
+      }
+      if(searchGraphicsLayers !== false){
+        dojo.forEach(mapVariable.graphicsLayerIds,function(lyr){
+          if(lyr.toLowerCase().search(lyrName.toLowerCase()) !== -1){
+            layers.push(mapVariable.getLayer(lyr));
+          }
+        });
+      }
+    });
+  }
+  else{
+    if(searchMainLayers !== false){
+      dojo.forEach(mapVariable.layerIds,function(lyr){
+        if(lyr.toLowerCase().search(layerName.toLowerCase()) !== -1){
+          layers.push(mapVariable.getLayer(lyr));
+        }
+      });
+    }
+    if(searchGraphicsLayers !== false){
+      dojo.forEach(mapVariable.graphicsLayerIds,function(lyr){
+        if(lyr.toLowerCase().search(layerName.toLowerCase()) !== -1){
+          layers.push(mapVariable.getLayer(lyr));
+        }
+      });
+    }
+  }
+
+  return layers;
+};
 
 
 function initUI(layers,index,map) {
