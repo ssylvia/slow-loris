@@ -81,7 +81,9 @@ function resetLayout(){
 	else{
 		$("#banner").show();
 		dojo.style(dojo.byId("descriptionPanel"), "display", "block");
+		dojo.style(dojo.byId("descriptionPanel"), "height", "45%");
 		dojo.style(dojo.byId("legendHeader"), "display", "block");
+		dojo.style(dojo.byId("legendPanel"), "display", "block");
 		dojo.style(dojo.byId("legendPanel"), "height", "45%");
 		$("#leftPane").show();
 		$("#mobileTabs").hide();

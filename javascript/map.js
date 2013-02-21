@@ -179,12 +179,17 @@ function createMap(){
 		dojo.place("<div id='description"+i+"' class='description'></div>",dojo.byId('descriptionPanel'),"last");
 		dojo.place("<div id='legend"+i+"' class='legend'></div>",dojo.byId('legendPanel'),"last");
 
+		var popup = new esri.dijit.Popup({
+		    highlight:false
+      	}, dojo.create("div"));
+
 		var mapDeferred = esri.arcgis.utils.createMap(arg.id, "mapDiv"+i, {
 			mapOptions: {
 				slider: true,
 				sliderPosition: "top-right",
 				nav: false,
-				wrapAround180:true
+				wrapAround180:true,
+				infoWindow: popup
 			},
 			ignorePopups:false,
 			bingMapsKey: configOptions.bingmapskey
@@ -476,6 +481,15 @@ function mapLoaded(){
 					dojo.style(dojo.byId("banner"),"height","165px");
 				}
 			}
+
+			$(".esriSimpleSliderIncrementButton").addClass("zoomButtonIn");
+          	$(".zoomButtonIn").each(function(i){
+          		$(this).after("<div class='esriSimpleSliderIncrementButton initExtentButton'><img style='margin-top:5px' src='images/home.png'></div>");
+				$(".initExtentButton").click(function(){
+					_maps[i].setExtent(_maps[i]._mapParams.extent);
+				});
+			});
+
 			dojo.forEach(_maps,function(map,i){
 				if (i != 0){
 					dojo.fadeOut({
