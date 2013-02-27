@@ -205,7 +205,7 @@ function createMap(){
 			dojo.connect(map,'onClick',stopTime);
 			dojo.connect(map,'onExtentChange',syncExtents)
 			dojo.connect(map,"onUpdateEnd",function(){
-				mapLoaded();
+				mapLoaded(i);
 				playAnimation();
 			});
 
@@ -523,9 +523,9 @@ function formatDate(date,datePattern){
 	});
 }
 
-function mapLoaded(){
+function mapLoaded(index){
 	var timeout = setTimeout("timeoutError()",10000);
-	if (mapsLoaded == configOptions.webmaps.length - 1){
+	if (index || mapsLoaded == configOptions.webmaps.length - 1){
 		if (mapsLoaded == configOptions.webmaps.length - 1){
 			if (configOptions.webmaps.length == 1){
 				if (_timeProperties[0] != null){

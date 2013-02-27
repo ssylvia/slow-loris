@@ -3,26 +3,32 @@ $(document).ready(function() {
 		changeMap($(this).index());
 	});
 	$(".sideToggle").click(function(){
-		if($(this).hasClass("activeToggle")){
-			$("#leftPane").hide();
+		if ($(this).attr("id") === "closeToggle") {
 			$(".sideToggle").removeClass("activeToggle");
+			$("#leftPane").hide();
 		}
 		else{
-			$(".sideToggle").removeClass("activeToggle");
-			$(this).addClass("activeToggle");
-			if($(this).index() === 2){
-				dojo.style(dojo.byId("legendHeader"), "display", "none");
-				dojo.style(dojo.byId("legendPanel"), "display", "none");
-				dojo.style(dojo.byId("descriptionPanel"), "height", "100%");
-				dojo.style(dojo.byId("descriptionPanel"), "display", "block");
+			if($(this).hasClass("activeToggle")){
+				$("#leftPane").hide();
+				$(".sideToggle").removeClass("activeToggle");
 			}
 			else{
-				dojo.style(dojo.byId("descriptionPanel"), "display", "none");
-				dojo.style(dojo.byId("legendHeader"), "display", "none");
-				dojo.style(dojo.byId("legendPanel"), "height", "100%");
-				dojo.style(dojo.byId("legendPanel"), "display", "block");	
+				$(".sideToggle").removeClass("activeToggle");
+				$(this).addClass("activeToggle");
+				if($(this).index() === 2){
+					dojo.style(dojo.byId("legendHeader"), "display", "none");
+					dojo.style(dojo.byId("legendPanel"), "display", "none");
+					dojo.style(dojo.byId("descriptionPanel"), "height", "100%");
+					dojo.style(dojo.byId("descriptionPanel"), "display", "block");
+				}
+				else{
+					dojo.style(dojo.byId("descriptionPanel"), "display", "none");
+					dojo.style(dojo.byId("legendHeader"), "display", "none");
+					dojo.style(dojo.byId("legendPanel"), "height", "100%");
+					dojo.style(dojo.byId("legendPanel"), "display", "block");	
+				}
+				$("#leftPane").show();
 			}
-			$("#leftPane").show();
 		}
 		dijit.byId("mainWindow").layout();
 	});
@@ -77,6 +83,7 @@ function resetLayout(){
 		$(".mobileTab").last().css("width",($(document).width()/3) + 10);
 		$(".sideToggle").show();
 		$(".sideToggle").eq(1).css("top",($(".sideToggle").eq(0).outerHeight() + 48));
+		$(".sideToggle").eq(2).css("top",($(".sideToggle").eq(0).outerHeight() + $(".sideToggle").eq(1).outerHeight() + 46));
 	}
 	else{
 		$("#banner").show();
