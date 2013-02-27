@@ -75,26 +75,29 @@ function resetLayout(){
 		}
 		dojo.style(dojo.byId("legendPanel"),"height",legendHeight+"px");
 	}
-	if($(document).width() < 800){
-		$("#banner").hide();
-		$("#leftPane").hide();
-		$("#mobileTabs").show();
-		$(".mobileTab").css("width",$(document).width()/3);
-		$(".mobileTab").last().css("width",($(document).width()/3) + 10);
-		$(".sideToggle").show();
-		$(".sideToggle").eq(1).css("top",($(".sideToggle").eq(0).outerHeight() + 48));
-		$(".sideToggle").eq(2).css("top",($(".sideToggle").eq(0).outerHeight() + $(".sideToggle").eq(1).outerHeight() + 46));
-	}
-	else{
-		$("#banner").show();
-		dojo.style(dojo.byId("descriptionPanel"), "display", "block");
-		dojo.style(dojo.byId("descriptionPanel"), "height", "45%");
-		dojo.style(dojo.byId("legendHeader"), "display", "block");
-		dojo.style(dojo.byId("legendPanel"), "display", "block");
-		dojo.style(dojo.byId("legendPanel"), "height", "45%");
-		$("#leftPane").show();
-		$("#mobileTabs").hide();
-		$(".sideToggle").hide();
+	if(_maps.length > 0){
+		if($(document).width() < 800){
+			console.log(_maps);
+			$("#banner").hide();
+			$("#leftPane").hide();
+			$("#mobileTabs").show();
+			$(".mobileTab").css("width",$(document).width()/3);
+			$(".mobileTab").last().css("width",($(document).width()/3) + 10);
+			$(".sideToggle").show();
+			$(".sideToggle").eq(1).css("top",($(".sideToggle").eq(0).outerHeight() + 48));
+			$(".sideToggle").eq(2).css("top",($(".sideToggle").eq(0).outerHeight() + $(".sideToggle").eq(1).outerHeight() + 46));
+		}
+		else{
+			$("#banner").show();
+			dojo.style(dojo.byId("descriptionPanel"), "display", "block");
+			dojo.style(dojo.byId("descriptionPanel"), "height", "45%");
+			dojo.style(dojo.byId("legendHeader"), "display", "block");
+			dojo.style(dojo.byId("legendPanel"), "display", "block");
+			dojo.style(dojo.byId("legendPanel"), "height", "45%");
+			$("#leftPane").show();
+			$("#mobileTabs").hide();
+			$(".sideToggle").hide();
+		}
 	}
 	dijit.byId("mainWindow").layout();
 }
